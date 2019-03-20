@@ -22,7 +22,7 @@ why so old?  It's because it's stable.  ubuntu calls these LTS's which is long t
 
 Every one has a code name, which is some kind of adjective + animal.  This one is bionic beaver.  i.e. Mega Bidoof.
 
------------
+---
 
 ^alt+t - command terminal for ubuntu
 ^d exits
@@ -129,7 +129,7 @@ man opens a "pager" which displays the manual page, so if you put it in front of
 
 quit pagers by typing q
 
-/ and a string, it searches inside.  n goes to the next thing.  shift + n goes to the previous thing
+`/` and a string, it searches inside.  n goes to the next thing.  shift + n goes to the previous thing
 ---------------
 
 redirection allows you to send the outputs of commands and put them into files or other commands.
@@ -222,14 +222,15 @@ sort - sorts lines of text
 
 shuf - basically works like sort -R
 
-------
+---
 
 tee - read from standard input and write to standard output and files, copy standard input to each file and also to standard output.
 
 -a --append , append to the given file(s), do not overwrite
 
 echo $'hello\nworld' for example is one way to add lines to things.  usually | it into tee
-------
+
+---
 
 apt - this is a high level command line interface for the package management system.
 
@@ -262,7 +263,7 @@ press :w to write the file
 press :wq to write the file AND quit
 dd will delete a line
 
---------------
+---
 
 git clone [URL] - makes a clone of a repository on github
 git status - shows the current state of the git repository
