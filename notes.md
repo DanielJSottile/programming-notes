@@ -326,7 +326,7 @@ what is `sudo`?
 
 - `git commit` - commits anything that is staged
 
-- `git commit -m ['commit messages here']' standard practice to add a message
+- `git commit -m ['commit messages here']` standard practice to add a message
 
 - `git push` - pushes current branch onto git repository
 
@@ -336,7 +336,7 @@ what is `sudo`?
 
 - you can type the first unambiguous prefix, but first 4 digits is easy to remember
 
-- master is the default branch name, you can use this too
+- `master` is the default branch name, you can use this too
 
 - `git diff` - shows the differences in the tracked files
 
