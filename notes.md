@@ -1,6 +1,6 @@
 # ITS A UNIX MACHINE!
 
-- command + space brings up spotlight
+- `command + space` brings up spotlight
 - when exiting terminal, type exit
 - `^d` also exits
 - `^` = control
@@ -137,9 +137,9 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `-e` allows it to interpret backslash escapes as different values
 
-- `\t` creates a tab (must have -e)
+- `\t` creates a tab (must have `-e`)
 
-- `\n` create a new line (must have -e)
+- `\n` create a new line (must have `-e`)
 
 
 ---
@@ -215,7 +215,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `||` - takes a command on the left and right side, and only runs the right if the left is unsuccessful
 
-- ';' - will run both commands no matter what
+- `;` - will run both commands no matter what
 
 ---
 
