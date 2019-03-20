@@ -1,2 +1,3 @@
 # programming-notes
-these are my notes!
+
+this is the second commit
