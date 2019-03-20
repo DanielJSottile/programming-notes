@@ -118,12 +118,12 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `mkdir -p` (doesn't error if it already exists) (it creates parent directories so it lets you add (or destroy) multiple at once)
 
-- for mkdir/rmdir -p, it is "idempotent" meaning that when you perform an action, it will always end up at the same state, or if you run it twice, it won't do anything the second time but it will succeed.
+- for `mkdir/rmdir -p`, it is "idempotent" meaning that when you perform an action, it will always end up at the same state, or if you run it twice, it won't do anything the second time but it will succeed.
 
 
 ---
 
-- `echo` - prints all of its arguments i.e echo "Hello World"
+- `echo` - prints all of its arguments i.e `echo "Hello World"`
 
 - single quotes also work, like in Python.
 
@@ -131,7 +131,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - you can also use ' " to write double quotes into what is printed.
 
-- `echo' -- help will print that, so it doesn't quite work like that.
+- `echo` -- help will print that, so it doesn't quite work like that.
 
 - `-n` will make it not print a new line afterwards
 
@@ -174,7 +174,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `-f`, `--force` ignores nonexistent files and arguments, never prompt
 
-- `-r` removes directories and their contents recursively, so you can get rid of specific ones.  for instance, rm -r a/b/c will get rid of only 'c'
+- `-r` removes directories and their contents recursively, so you can get rid of specific ones.  for instance, `rm -r a/b/c` will get rid of only 'c'
 
 - `-v`, --verbose explains what is going on
 
@@ -189,7 +189,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `yes` - output a string repeatedly until killed.
 
-- kill it by ^c.  this works for everything.
+- kill it by `^c`.  this works for everything.
 
 ---
 
@@ -247,8 +247,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `-L` `--max-line-length` , print the maximum display width
 
-- you can also do something like this wc -l -w -m -c -L file | awk '{print $2" "$1" "$3" "$4" "$5" "$6}'
- to switch the order of the things.
+- you can also do something like this `wc -l -w -m -c -L file | awk '{print $2" "$1" "$3" "$4" "$5" "$6}'`  to switch the order of the things.
 
 ---
 
@@ -264,7 +263,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `-r` `--reverse` , reverse the result of comparisons
 
-- `shuf` - basically works like sort -R
+- `shuf` - basically works like sort `-R`
 
 ---
 
@@ -272,7 +271,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `-a` `--append` , append to the given file(s), do not overwrite
 
-- echo $'hello\nworld' for example is one way to add lines to things.  usually | it into tee
+- `echo $'hello\nworld'` for example is one way to add lines to things.  usually `|` it into `tee`
 
 ---
 
@@ -290,9 +289,9 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `update-manager` & will do the same thing, but in a nice graphical box.  muy bueno 
 
-- you must add `sudo` before apt / apt-get in order to update
+- you must add `sudo` before `apt` / `apt-get` in order to update
 
-what is sudo?
+what is `sudo`?
 
 - it basically works like "run as administrator" or in this case, a "superuser" but inside your terminal.  It lets you change basically anything.  BEWARE.
 
