@@ -73,6 +73,10 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `$?` -shows the exit code of the previous command
 
+- `!!` - a substitution containing the previous command
+
+    - `sudo !!` for instance, works for if you need admin priviledges on a command.
+
 ---
 
 - `ls` shows what files and directories exist on a path.  by default, it uses the current path.
@@ -285,7 +289,7 @@ WHAT IS MEANT BY A TERMINAL?
 
 - `apt remove` / `apt-get remove` , uninstalls a package
 
-- `apt upgrade` / `apt-get upgrade` , will upgrade all packages*
+- `apt upgrade` / `apt-get upgrade` , will upgrade all packages
 
 - `update-manager` & will do the same thing, but in a nice graphical box.  muy bueno 
 
@@ -315,6 +319,14 @@ what is `sudo`?
 - press `:wq` to write the file AND quit
 
 - `dd` will delete a line
+
+- `^` goes to the beginning of the line
+
+- `$` goes to the end of the line 
+
+- `shift + g` goes to the end of the file
+
+- `[#] shift + g` goes to that specific number line
 
 ---
 
@@ -346,8 +358,28 @@ what is `sudo`?
 
 - `git pull` - it pulls in the changes from the remote branch
 
+- `git checkout <source> -b <branchname>` - create a new branch from the source named `<branchname>`
+
+    - `<source>` is almost always origin/master, `<branchname>` can be whatever you want as long as it isn't master.
+
+- `git branch` - it lists the local branches
+
+- 'git checkout <branchname>` will switch branches
+
+
+
 ---
 
+- `less` - is a pager.  Useful for viewing files nicely.
 
+---
 
+- `curl` - it downloads something from a URL.
 
+---
+
+- `dpkg` it does a lot of stuff, but it basically let's you see what is installed
+
+---
+
+- `
