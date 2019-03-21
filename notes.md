@@ -366,6 +366,10 @@ what is `sudo`?
 
 - 'git checkout <branchname>` will switch branches
 
+- `git branch --merged' shows all branches that are merged with master
+
+- `git branch -d <branchname>` deletes that branchname
+
 
 
 ---
@@ -382,4 +386,42 @@ what is `sudo`?
 
 ---
 
-- `
+- `grep` - print lines matching a pattern
+
+    - `-E` - extended regex mode
+
+    - `-i` - ignore case (makes it not case sensitive)
+    - `-v` - inverts the match i.e. find what doesnt match
+    - `-l` - print just the file names that match
+
+    - `-L` - print just the file names that don't match
+
+    - `-o` - only prints out the characters that match your pattern
+
+    - `-q` - prints nothing, but makes the exit code match (will return 0)
+
+    - `-r` - recursive matching mode, so it will recursively search through files and attempt to match
+
+- a neat trick: `grep --color=always <pattern> <file> | less -R` will open a less that shows the color coded of the pattern.  neat huh?
+
+- `^` matches the beginning of a string i.e. it finds something only at the beginning of a line.  the `^` is known as an anchor. is always put at the beginning.
+
+- `$` matches the end of a string i.e. it finds something only at the END of a line.  also an anchor. since this is also a special character, we have to put 'single quotes$' around that. must always be at the end.
+
+- `.` matches any character, i.e. it's a single character wildcard
+
+- `*` is a repeat quantifier, meaning 0 or more. it's also a special character and requires `'single quotes*'`
+
+- `\` it makes the character after it treated differently, most commonly used to disable special characters.  So if I wanted to search for a "." I would use `\.`.  this is also special, ironically, so it must be in 'single quotes'
+
+- `+` it's like `*` but only 1 or more.  only available in extended regex mode (`-E`)
+
+- `[...]` it finds ranges of characters i.e. `[A-Z]`.  They are another special character, so put single quotes around them.
+
+- `(...)` it does nothing special on it's own, but can look for groups of works sort of like how `*` works on single characters.  is a special character and needs single quotes around it. it also needs -E.  for example, grep -E '( it)' [file] would find all instances of' it', and any instances that repeat ' it' 
+
+- `|` allows you to pick one or the other, is often inside of parentheses, must use -E. also needs to be in quotes
+
+- `{...}` inside is a number expression as a repeat quantifier; it works like `*` and `+` but you can choose how many repeats you are looking for.  needs -E and 'quotes'.  for example, `grep -E '0{2,}' [file}` will only look for '00', wheras 2,5 would look for a range of those amounts of characters.
+
+- `?` matches 0 or 1 as a repeat quantifier.  needs -E. so basically matches with the character before it or without it.
