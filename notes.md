@@ -39,6 +39,8 @@
 
 - on gnu you can use long options i.e. `--help` or `--force`. muy bueno
 
+- alt + # will switch between your tabs
+
 ---
 
 WHAT IS MEANT BY A TERMINAL?
@@ -425,3 +427,69 @@ what is `sudo`?
 - `{...}` inside is a number expression as a repeat quantifier; it works like `*` and `+` but you can choose how many repeats you are looking for.  needs -E and 'quotes'.  for example, `grep -E '0{2,}' [file}` will only look for '00', wheras 2,5 would look for a range of those amounts of characters.
 
 - `?` matches 0 or 1 as a repeat quantifier.  needs -E. so basically matches with the character before it or without it.
+
+---
+
+- `which` - locates executables
+
+	- `-a` - prints out all the matching pathnames matching the argument
+
+- `$PATH` - an environment variable that contains where executables can be.  The contents of the variable are paths separated by :
+
+---
+
+- `type` - it shows you what provides it.
+
+-  we made a personal bin directory and we put it on the PATH.  we used the export command, which is a bash built in which sets an environment variable.  
+
+- `#!/usr/bin/env python3` - called a shebang, originally "hash bang", tells the os how to run an executable.  they are either 1 or 2 arguments, cant be more or less.  first has to be a full path.  it finds the path to python3 and runs it.
+
+- `env` - runs a program in a modified environment.  running just env prints all environment variables.  if you run it with more than 1 environment, it takes this form `env VAR=value ... program arg arg`.  
+
+- `chmod +x hello-world` - stands for change mode, it turns the file we made called "hello-world" into an executable file.  
+
+- `export PATH="$HOME/bin:$PATH"` - $HOME and $PATH are environment variables and my shell substituted those variables into the export command.  This lets us move the $HOME/bin path into the begining of our home directory path.  then we put that into our bashrc (bash run commands) which runs whenever you start a shell.
+
+- `source` - it runs the commands in a file as if you wrote them on your shell.  it has an alias `.` not the same as `.` the directory
+
+- `venv/bin/activate` - it set the path with the venv bin to the front of PATH so we can mess around with python and not destory anything.  It also set the PS1 to venv as the shell prompt
+
+- `pip` - is the package manager for python.  
+	- `install` , `uninstall`, and `freeze` (which shows you what is installed) only useful option for freeze is `--all`
+
+- `flake8` - is a linter for python; it finds formatting mistakes in your programming and suggests fixes.  It can find unused variables/assignments, etc.  run as `watch flake8 [file path]` in a different window.
+
+---
+
+- `watch` - execute a program periodically, showing output fullscreen
+
+---
+
+PYTHON!
+-------
+
+every script should end with this:
+
+```python
+def main():
+   ...
+
+
+if __name__ == '__main__':
+    exit(main())
+```
+
+- it is akin to the int main in C++
+
+---
+
+- for loop
+	- is good for when you have an interval or a fix sized bound, i.e. from 1 - 100, or from 2 to something.  Another is when you are iterating over an iterable object.
+
+- written as `for <unpacking> in <iterable>:`
+	- the unpacking is basically an assignment, and the iterable is what we are iterating over.
+	- the most basic iterable is a function called `range`
+
+- while loop
+	- is useful running a chunk of code while a condition is true.
+
