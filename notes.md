@@ -457,6 +457,12 @@ what is `sudo`?
 - `pip` - is the package manager for python.  
 	- `install` , `uninstall`, and `freeze` (which shows you what is installed) only useful option for freeze is `--all`
 
+- `virtualenv` - a tool that makes a virtual python environment, takes -p [python version] and the directory, which you should put in the project you are working on and call it `venv`
+
+- let's say I break my venv...
+
+- `deactivate` - undoes the activate we did before (see above)
+
 - `flake8` - is a linter for python; it finds formatting mistakes in your programming and suggests fixes.  It can find unused variables/assignments, etc.  run as `watch flake8 [file path]` in a different window.
 
 ---
@@ -492,4 +498,9 @@ if __name__ == '__main__':
 
 - while loop
 	- is useful running a chunk of code while a condition is true.
+
+- `elif` will run if the `if` statement before it fails
+
+	- you can have 1-inf `if` statements, 0-inf `elif` statements, and 0 or 1 `else` statements in that order.
+
 
