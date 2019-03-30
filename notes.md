@@ -330,6 +330,8 @@ what is `sudo`?
 
 - `[#] shift + g` goes to that specific number line
 
+- `u` will undo.
+
 ---
 
 - `git clone [URL]` - makes a clone of a repository on github
