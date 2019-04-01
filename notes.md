@@ -491,6 +491,257 @@ if __name__ == '__main__':
 
 ---
 
+STRINGS
+-------
+
+- there are 4 syntaxes for strings:
+
+	- `'string'`
+	- `"string"`
+	- `'''string'''`
+	- `"""string"""`
+
+- the first two are normal, single line string literals.  You can put double quotes inside of a single quote string and vise versa.
+- the triple quoted strings are multi line strings.  They preserve spacing and new lines like this:
+
+```python
+x = """
+hello
+world
+"""
+
+y = """
+    hello
+    world
+"""
+
+z = """\
+hello
+world
+"""
+
+print(x == '\nhello\nworld\n')
+print(y == '\n    hello\n    world\n')
+print(z == 'hello\nworld\n')
+```
+- notice how the `\` in the third example escapes the newline, making it not appear inside the string.
+
+- as long as there isnt a triple quote inside of the triple string, you can use either `'` or `"` inside.
+
+- conventionally, `"""` should be used for docstrings, which the various examplees are below: 
+
+```python
+"""
+This is a docstring for the module
+"""
+
+class C:
+    """this is a docstring for the class"""
+
+    def meth(self):
+        """this is a docstring for the method"""
+
+
+def func():
+    """this is a docstring for the method"""
+
+
+print(__doc__)
+print(C.__doc__)
+print(C.meth.__doc__)
+print(func.__doc__)
+```
+- those ways below are how to call the docstrings above.
+- the `__foo__` is called a magic attribute, or a "dunder" attribute.  They must be leading and trailing.  They are hooks for the interpreter.
+
+- Docstrings
+	- they basically work as a summary for the programmer so they can see how a function works.  They can be 1 line or multiline.  Multiline should have a blank space between the first line summary and the rest of the docstring
+	- a multiline docstring should end with triple quotes on its own line.
+
+- PEP 257: https://www.python.org/dev/peps/pep-0257/
+
+- `u'unicode string'`
+	- this prefix is there only for backwards compatability because it is default in python3.0
+	- it means it is a text string
+
+- `r'raw string'`
+	- it preserves literal escape sequences in the string
+	- something like \n which normally create a new line will be treated as regular characters.
+	
+- these can be used for any of the strings we saw above.
+
+- `b'foo'`
+	- a bytes literal, a binary string, a bytestring
+	- it makes a stringlike thing that is really a sequence of integers
+	- br and rb are valid
+
+- `f'foo'` - (new in python3.6)
+	- they are called format strings, will look at later.
+	- rf and fr are valid
+
+- illegal combinations so far are: ur, ru, uf, fu, ub, bu, fb, bf.  These will all fail.
+
+- the typename of strings in python is `str`
+
+- operators that can be used with strings
+
+	- multiplication 'hi' * 3 >>> 'hihihi'
+	- `<`, `<=`, `>`, `>=`, `==`, `!=` checks values of string to sort them.
+		- 'abc' < 'abb' False
+		- 'abc' < 'ABC' False
+		- 'abc' < 'bbc' True
+	- plus '+' or the concatenation operator
+		- 'foo' + 'bar' >>> 'foobar'
+	- `in` checks if the string is in another string
+		- 'f' in 'foobar' True, for instance
+	- `len(foo)` shows how long the string is.  it looks for this function: `.__len__()`
+
+STRING METHODS
+--------------
+
+- how you call any method
+```python
+foo = 'hello world'
+print(foo.upper())
+```
+
+- how you should apply these to strings
+- `'string'.capitalize()` - can also have a variable containing a string instead of the string
+
+- `.upper()` - makes everything upper case
+- `.title()` - makes it be capitalized on start of every word
+- `.lower()` - makes everything lower case
+- `.swapcase()` - swaps the casetype
+- `.casefold()` - its like .lower() on steroids, since it will convert things like 'ß' to 'ss'
+- `.capitalize()` - returns a copy of the string with the first character capitalized and the rest lowercase 
+- `str.startswith(s, [, start [, end]])` - the last part allows you to bound your search
+- `str.endswith(s, [, start [, end]])`
+
+- `.isalnum()` - alphanumeric, `.isalpha()`, `.isascii()`, `.isdecimal()` - 1-10, `.isdigit()` - all the characters are 0-9 , `.isidentifier()` - whether that string could be a python identifier, is it a variable name.
+- `.islower()` - are they lower case `.isnumeric()`, `.isprintable()` - can everything go to the screen?
+- `.isspace()`, `.istitle()` - are they capitalized by front of each word `.isupper()`
+
+- `.find(s, [, start[, end]])` - it will find the first position in the string which matches s, and if not, it returns -1 (which is true), gives the position
+- `.index(...)` - same thing, but raises a `ValueError` if it doesnt find anything
+- `.rfind(...)` - same thing, but look from the end
+- `.rindex(...)` - same thing, but look from the end
+
+- `.strip([chars])` - will remove those characters from the edges of strings, and by default is blank.  it will strip any regardless of order.
+- `.lstrip([chars])` - only from the left
+- `.rstrip([chars])` - only from the right
+
+- `.replace(old, new[, count]`
+
+- `.partition(sep)` - returns 3 things, if it finds it, it will split along thereand the rest will be on the right.  if not, everything is on the left.
+
+```pycon
+>>> 'foo bar baz'.partition(' ')
+('foo', ' ', 'bar baz')
+>>> 'foo bar baz'.partition('!')
+('foo bar baz', '', '')
+```
+
+- `.rpartition(sep)` - the same, but it starts it from the right side
+
+```pycon
+>>> 'foo bar baz'.rpartition(' ')
+('foo bar', ' ', 'baz')
+>>> 'foo bar baz'.rpartition('!')
+('', '', 'foo bar baz')
+```
+
+- `.split(sep=None, maxsplit=-1)` - first is what is being split (and removed), last is how many times it does it.
+- `.rsplit(...)` - does it from the right side
+- `.splitlines([keepends])` - see below
+- `\n`, `\r\n`, `\r` - all different types of newline.
+
+```pycon
+>>> 'split\nsplit\r\nsplit\r'.splitlines()
+['split', 'split', 'split']
+>>> 'split\nsplit\r\nsplit\r'.splitlines(True)
+['split\n', 'split\r\n', 'split\r']
+```
+
+- `.join(iterable)` - it takes the iterable and inserts the string in between each thing.  works the opposite of split
+
+```pycon
+>>> ', '.join(('a', 'b', 'c'))
+'a, b, c'
+```
+
+- `.format(*args, **kwargs)` 
+
+---
+
+String Formatting
+-----------------
+
+- `%-formatting`
+	- 'hello %s' % 'world' >>> 'hello world'
+	- 'hello %s %s' % (1, 2) >>> 'hello 1 2'
+	- 'hello %(hi)s %(ohai)s' % {'hi': 'one', 'ohai': 'two'} >>> 'hello one two'
+
+- `new string formatting` (uses .format())
+	- 'foo {bar} {baz}'.format(bar='hello', baz='ohai') >>> 'foo hello ohai'
+	- 'foo {} {}'.format('bar', 'baz') >>> 'foo bar baz'
+	- 'foo {1} {0}'.format('bar', 'baz') >>> 'foo baz bar'
+	- 'foo {0} {0}'.format('bar', 'baz') >>> 'foo bar bar'
+	- https://pyformat.info/
+	- 'hello {!r}'.format('world') >>> "hello 'world'"
+	- that is a "repr" which is a built in function it shows a programer representation of an object (repr(x))
+
+```pycon
+>>> print('foo')
+foo
+>>> print(repr('foo'))
+'foo'
+```
+
+- `f strings`
+
+```pycon
+>>> thing = 'world'
+>>> f'hello {thing}'
+'hello world'
+```
+
+---
+
+SLICING, INDEXING, ITERATING
+----------------------------
+
+-Iterating - basically, just think of this as how you would use it in a for loop
+
+```pycon
+>>> for c in 'hello':
+...     print(repr(c))
+... 
+'h'
+'e'
+'l'
+'l'
+'o'
+```
+
+- iterating over a string produces one character string per iteration
+
+- Indexing - they will also give one character strings.
+	- foo[0]
+	- foo[-1] will do the first index from the back
+	- will raise an IndexError if out of bounds
+
+- Slicing - syntax looks like this: s[<START>:<END>:<STEP>], but the most basic is s[:] which returns a copy of the string
+	- 'hello'[1:]
+	'ello'
+	- 'abcdefgh'[::2] (is a step)
+	'aceg'
+	- it's kinda like list(range(0, 7, 2))
+	[0, 2, 4, 6]
+
+
+
+---
+
 - for loop
 	- is good for when you have an interval or a fix sized bound, i.e. from 1 - 100, or from 2 to something.  Another is when you are iterating over an iterable object.
 
