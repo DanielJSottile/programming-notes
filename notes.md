@@ -79,6 +79,8 @@ WHAT IS MEANT BY A TERMINAL?
 
     - `sudo !!` for instance, works for if you need admin priviledges on a command.
 
+- `!$' - similar to above, but only does the last part of the command
+
 ---
 
 - `ls` shows what files and directories exist on a path.  by default, it uses the current path.
@@ -345,6 +347,7 @@ what is `sudo`?
 - `git commit -m ['commit messages here']` standard practice to add a message
 
 - `git push` - pushes current branch onto git repository
+	- `git push origin HEAD` - HEAD is a shortcut for the current thing you have checked out, and origin is the remote that you are pushing to.  Do this whenever you are doing a pull request, or on anything really.
 
 - `git show` - shows the commit that I made and what was done on it
 
@@ -368,9 +371,9 @@ what is `sudo`?
 
 - `git branch` - it lists the local branches
 
-- 'git checkout <branchname>` will switch branches
+- `git checkout <branchname>` will switch branches
 
-- `git branch --merged' shows all branches that are merged with master
+- `git branch --merged` shows all branches that are merged with master
 
 - `git branch -d <branchname>` deletes that branchname
 
@@ -585,15 +588,15 @@ print(func.__doc__)
 
 - operators that can be used with strings
 
-	- multiplication 'hi' * 3 >>> 'hihihi'
+	- multiplication `'hi' * 3 >>> 'hihihi'`
 	- `<`, `<=`, `>`, `>=`, `==`, `!=` checks values of string to sort them.
 		- 'abc' < 'abb' False
 		- 'abc' < 'ABC' False
 		- 'abc' < 'bbc' True
-	- plus '+' or the concatenation operator
-		- 'foo' + 'bar' >>> 'foobar'
+	- plus `+` or the concatenation operator
+		- `'foo' + 'bar' >>> 'foobar'`
 	- `in` checks if the string is in another string
-		- 'f' in 'foobar' True, for instance
+		- `'f' in 'foobar' True`, for instance
 	- `len(foo)` shows how long the string is.  it looks for this function: `.__len__()`
 
 STRING METHODS
@@ -738,7 +741,114 @@ SLICING, INDEXING, ITERATING
 	- it's kinda like list(range(0, 7, 2))
 	[0, 2, 4, 6]
 
+---
 
+LISTS
+-----
+
+- lists only have 1 syntax, which looks like this: [..., ...,]
+	- `['hello', 'world']`
+
+- list('hello')
+	- ['h', 'e', 'l', 'l', 'o']
+
+- lists can be multi-line like this:
+
+```python
+x = [
+    1,
+    2,
+    3,
+]
+```
+- the comma at the end is optional, but it's good practice for multi line lists.
+
+LIST OPERATORS
+--------------
+
+- `+` you can add lists together, but only lists to lists.
+- `*` it repeats the list 
+- `<`, `>`, `<=`, `>=`, `==`, `!=`, they work the same as the strings, but they start by comparing the 1st element, 2nd, etc.
+- `in` - checks if any of the elements are equal to the right hand side.
+
+```pycon
+>>> 3 in [1, 2, 3]
+True
+```
+
+---
+
+INDEXING AND SLICING
+--------------------
+
+- works the same as strings!  one small difference is that you can assign to a slice (in essence replace it)
+
+```pycon
+>>> x = [1, 2, 3, 4, 5]
+>>> x[1:3]
+[2, 3]
+>>> x[1:3] = [6, 7, 8]
+>>> x
+[1, 6, 7, 8, 4, 5]
+```
+
+- lists are 'mutable' which means parts inside them can be changed.  so for instance, individual indexes can be changed.
+
+---
+
+LIST METHODS
+------------
+
+- `list.append(element)` - adds to the end of a list
+- `list.pop([i])` - i is index, or the last index if not i, removes that element.
+- `list.insert(i, element)` - inserts into list at index i
+- `list.extend(itterable)` - appends all the elements in the itterable
+
+```pycon
+>>> x = [1, 2, 3]
+>>> x.extend([4, 5, 6])
+>>> x
+[1, 2, 3, 4, 5, 6]
+```
+- `list.count(x)` - counts the number of times x appears in the list
+- `list.index(x[, start[, end]])` - this find the index if the first element that matches, and raises ValueError if it doesnt exist.
+- `list.remove(x)` - this removes the first element matching x, and raises ValueError if it doesnt exist.
+- `list.clear()` - empties the entire list
+- `list.sort(key=None, reverse=False)` - this sorts the list in place, and the key is a function that takes the element and returns the sort key.
+
+```pycon
+>>> def uppercase(s):
+...     return s.upper()
+... 
+>>> x = ['fOo', 'Foo', 'bar']
+>>> x.sort()
+>>> x
+['Foo', 'bar', 'fOo']
+>>> x.sort(key=uppercase)
+>>> x
+['bar', 'Foo', 'fOo']
+``` 
+	- there is also `sorted(x)` and `sorted(iterable)`
+- `list.reverse()` - it reverses the list in place.
+	- there is also `reversed(x)` would reverse a list of x, it returns a reversed iterator of the list, does not actually modify.  there's also `reverse(reversible)`
+
+- `list.copy()` - copies a new shallow copy of the list.
+
+```pycon
+>>> x = [[1, 2, 3], [4, 5, 6]]
+>>> x[0].append(5)
+>>> x
+[[1, 2, 3, 5], [4, 5, 6]]
+>>> y = x.copy()
+>>> y.append([])
+>>> x
+[[1, 2, 3, 5], [4, 5, 6]]
+>>> y
+[[1, 2, 3, 5], [4, 5, 6], []]
+>>> x[0].append(7)
+>>> y
+[[1, 2, 3, 5, 7], [4, 5, 6], []]
+```
 
 ---
 
