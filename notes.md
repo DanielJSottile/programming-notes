@@ -866,4 +866,53 @@ LIST METHODS
 
 	- you can have 1-inf `if` statements, 0-inf `elif` statements, and 0 or 1 `else` statements in that order.
 
+---
+
+PYTEST
+------
+
+- first, place a venv inside the project you are working on.
+- install pytest with pip install pytest
+- then inside the project folder create a directory called `tests` and inside that directory create `__init__.py` and `[name of file]_test.py`
+
+- inside the test.py file, import the name of the file i.e. `import project_3`
+
+- the basic test you can run is structured like this:
+
+```
+def test_equals_digit():
+    assert project_3.equals_digit(4697, 5) is False  # (or == something)
+```
+
+- however, this only allows you to do one test per function, and you have to rename it.
+
+- if you import pytest, you can put this as your overall test example:
+
+```
+@pytest.mark.parametrize(
+    ('param1', 'param2'),
+    (
+        (1, 2),
+        (3, 4),
+    ),
+)
+def test_foo(param1, param2):
+    assert file.foo(param1) == param2 
+```
+
+- param2 is usually 'expected'
+
+- for prints, you have to do a little something different:
+
+- you'll need to do something like this
+
+``` 
+def test_func(capsys):
+    file.func(param1, param2)  # make it the actual values you are testing
+    captured = capsys.readouterr()
+    assert captured.out == "however it's suppossed to be printed"
+```
+ 
+
+    
 
