@@ -852,6 +852,66 @@ LIST METHODS
 
 ---
 
+TUPLES
+------
+
+- syntax (x, y), though technically you can have something like y = 1, 2
+- `()`, `(1,)`, `(1, 2)`
+- just like lists, you can construct one like this `tuple(iterable)` => ('h', 'e', 'l', 'l', 'o')
+- they can be multi line like this:
+```
+x = (
+    1,
+    2,
+    3,
+)
+```
+
+- what is a tuple?  it is a sequence type, sort of like a list, but you cannot modify it.
+
+
+TUPLE OPERATORS
+---------------
+
+- they support the same as the LIST OPERATORS!  EASY!
+
+INDEXING AND SLICING
+--------------------
+
+- indexing and slicing is similar, but you cannot assign to a slice or index because a tuple is immutable
+
+METHODS
+-------
+
+- there are 2:
+- tuple.count(x) - counts the amount of things in the tuple.
+- tuple.index(x[, start[, end]]) - this find the index if the first element that matches, and raises ValueError if it doesnt exist.
+
+NAMED TUPLES
+------------
+
+- `collections.namedtuple(typename, field_names, *, rename=False, defaults=None, module=None)`
+
+- here is an example:
+
+```pycon
+>>> import collections
+>>> Car = collections.namedtuple('Car', ('make', 'model', 'color'))
+>>> car = Car('chevy', 'corvette', 'red')
+>>> car
+Car(make='chevy', model='corvette', color='red')
+>>> car.count('chevy')
+1
+>>> car.make
+'chevy'
+>>> car.model
+'corvette'
+```
+
+- they are their own data type, but still inherit from tuple.  They are basically tuples.
+
+---
+
 - for loop
 	- is good for when you have an interval or a fix sized bound, i.e. from 1 - 100, or from 2 to something.  Another is when you are iterating over an iterable object.
 
@@ -861,10 +921,72 @@ LIST METHODS
 
 - while loop
 	- is useful running a chunk of code while a condition is true.
+        - is often found in this pattern;
+```python
+# INITIALIZE
+while CONDITION:
+    # BODY
+    # UPDATE (often the same as initialize)
+```
 
 - `elif` will run if the `if` statement before it fails
 
 	- you can have 1-inf `if` statements, 0-inf `elif` statements, and 0 or 1 `else` statements in that order.
+
+
+---
+
+I/O
+---
+
+- opening files:
+- syntax: `open(filename, mode='r', ...)`
+- ran as:
+```python
+with open(filename) as file_obj:
+    ...
+```
+
+- `r` - reading a file
+- if file does not exist, it will come up with an error.
+- `w` - writing a file
+- w opens the file for writing, truncate to zero bytes, and then start writing.  It will empty files with that name beforehand.
+- `a` - append mode, adds to the end of a file.
+- if you put a `b` next to any of these, it will do it in binary mode, which just gives the raw bytes.
+- occasionally will need the `+` which is used for read and write mode.
+
+- writing files:
+- syntax: `file_obj.write('foo\n')`
+- you can also do this: `print('foo', file=file_obj)`
+- another writing function: `file.obj.writelines(<iterable of lines>)`
+- but you could also do:
+```python
+for line in lines:
+    file_obj.write(line)
+```
+- sometimes when writing and reading to disk, parts of the file are in memory before they are on disk.  use `file_obj.flush()` that flushes the buffer.  if you use it, put it after write calls.
+
+- reading from a file:
+- if you are reading line by line:
+```python
+with open('foo.txt') as f:
+    for line in f:
+        print(line, end='')
+```
+
+- theres a less good way to read all the lines in a file:
+- `file_obj.readlines()` which returns a list of lines.
+- `file_obj.readline()` reads a single line, if you run it once, it reads the first line, then if you run it again it reads the second line.
+- `file_obj.read(size=-1)` - it would read the entire file as one string.
+- but AHA! you can change the size of that to 1 and read the file one character at a time!
+
+- there are some things that act like file objects but are not actually file objects, such as:
+- urlopen (opens urls) and returns a binary file, also you have to import urlopen
+- StringIO - is an in memory file and comes from the io module. for example: `sio = io.StringIO('hello world')`
+```pycon
+>>> sio.read(1)
+'h'
+```
 
 ---
 
