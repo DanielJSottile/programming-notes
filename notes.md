@@ -318,6 +318,8 @@ what is `sudo`?
 
 - press `:q` to exit
 
+- `:q!` exit and discard changes
+
 - press `:w` to write the file
 
 - press `:wq` to write the file AND quit
@@ -333,6 +335,8 @@ what is `sudo`?
 - `[#] shift + g` goes to that specific number line
 
 - `u` will undo.
+
+- `:sort` sorts the file by character value 
 
 ---
 
@@ -475,6 +479,11 @@ what is `sudo`?
 - `watch` - execute a program periodically, showing output fullscreen
 
 ---
+
+- `sed` - stream editor, performs basic text transformations
+- `-i` transforms files in place
+- `-r` uses extended regex
+
 
 PYTHON!
 -------
@@ -776,6 +785,14 @@ LIST OPERATORS
 True
 ```
 
+- `del` deletes that array position
+```pycon
+>>> x = [1, 2, 3]
+>>> del x[1]
+>>> x
+[1, 3]
+```
+
 ---
 
 INDEXING AND SLICING
@@ -933,6 +950,117 @@ while CONDITION:
 
 	- you can have 1-inf `if` statements, 0-inf `elif` statements, and 0 or 1 `else` statements in that order.
 
+---
+
+DICTIONARIES
+------------
+
+- syntax: `{'key': value, 'key2': value, 'key3': value}`
+or
+- `dict(key='value', key2='value'`)
+or
+- `dict([('key1', 'value1'), ('key2', 'value2')])`
+- what it lets you do is map keys to values, allows you to do lookups
+
+- operators that can be used:
+    - `in` checks if the key exists inside the dictionary
+    - `del` will delete an entry
+        ```pycon
+        >>> x = {'k': 1, 'k2': 2}
+        >>> del x['k']
+        >>> x
+        {'k2': 2}
+        ```
+    - `==` and `!=` checks if keys and values are the same
+    - `len(dct)` will tell you how many entries there are
+    - looping in dictionaries changes the keys and values:
+    ```pycon
+    >>> for k in {'k': 1, 'k2': 2}:
+    ...     print(k)
+    ... 
+    k
+    k2
+    ```
+
+-indexing
+
+- you can look up the keys (but cannot change them)
+```pycon
+>>> x = {'k': 1, 'k2': 2}
+>>> x['k2']
+2
+```
+- gives a KeyError: if accessed out of bounds
+- you can modify the values as well:
+```pycon
+>>> x
+{'k': 1, 'k2': 2}
+>>> x['k2'] = 3
+>>> x
+{'k': 1, 'k2': 3}
+```
+
+- methods
+
+- `dct.clear()`
+- `dct.copy()`
+- `dct.get(key, default=None)` - this retrieves the value for the key or defaults if not present
+    - usaully bad because it means you're guessing your data
+- `dct.pop(key[, default])` - it will remove the entry returning the value of that entry, and if default is not present and key is not present, raise a `KeyError`.
+    - if default is present it will return that value instead
+- `dct.setdefault(key, default=None)` - it will set the key to the default value if the key isnt present, and returns the value.
+```pycon
+>>> x
+{'k': 1, 'k2': 2}
+>>> x.setdefault('k', 999)
+1
+>>> x
+{'k': 1, 'k2': 2}
+>>> x.setdefault('k3', 999)
+999
+>>> x
+{'k': 1, 'k2': 2, 'k3': 999}
+```
+- `dct.popitem()` - returns a key value pair from the dictionary and delete it from the dictionary.
+    - it will return the last pair that was set in the dictionary, its a new behavior in 3.6
+- `dct.update(other)`
+    - `dct.update(k=1, k2=2)`
+    - `dct.update({'k': 1, 'k2': 2})`
+    - `dct.update([('k', 1), ('k2', 2)])`
+- this adds multiple values and keys to the dictionary and overwrites them if they are already there.
+
+- `dct.keys()` returns a keyview, iterating over it iterates over the keys
+- `dct.values()` returns a valuesview, iterating over it iteraves the values
+- `dct.items()` returns a view of both, iterating gives both.
+```pycon
+>>> x = {'k': 1, 'k2': 2}
+>>> for k, v in x.items():
+...     print(f'{k} = {v}')
+... 
+k = 1
+k2 = 2
+```
+- dict.fromkeys(iterable, value=none) - it creates a dictionary that takes from the iterable and sets them all to the value.
+```pycon
+>>> dict.fromkeys([1, 2, 3], 'ohai')
+{1: 'ohai', 2: 'ohai', 3: 'ohai'}
+```
+
+---
+
+LAMBDA
+------
+
+-a lambda is a one line function with no name
+-if you had a function that looked like this:
+```
+def func(a, b, c):
+    return a + b // c
+```
+- then the equivalent lambda would look like this:
+- `func = lambda a, b, c: a + b // c`
+- they allow you to cut corners when things need a function
+- they have the name '<lambda>'
 
 ---
 
@@ -1034,7 +1162,45 @@ def test_func(capsys):
     captured = capsys.readouterr()
     assert captured.out == "however it's suppossed to be printed"
 ```
- 
+
+---
+
+COVERAGE
+--------
+
+- coverage is a tool that shows which lines get executed.
+- we ran these commands to use it.
+- `coverage erase` - erased all the previous info about coverage
+- `coverage run -m pytest tests` runs the module pytest with argument tests while coverage is instrumented
+- `coverage report --show-missing --omit=venv*` - gave us a report about the coverage
+- `coverage html --omit=venv*` - this makes an html report of the coverage
+    - `firefox htmlcov &` - opened it in firefox in the background
+- you can use this with pytests to show which lines have been tested.
+
+---
+
+FLAKE8
+------
+
+- if you use `# noqa` will ignore all errors
+- if you use this form `# noqa: E702` it will ignore that specific error
+- `# flake8: noqa` ignores all flake8 errors
+
+---
+
+DEBUGGER
+--------
+
+- in python3.6 or lower: `import pdb; pdb.set_trace()` (at the top of the file)
+- in python3.7 or newer: `breakpoint()` (wherever you want to start debugging code)
+- `list` shows where you are about to run a line of code
+- `n` goes to the next line
+- `s` step into, which lets you follow into a function call and see how it executes
+- `p [variable name]` prints the variable
+- `pp [var name]` pretty prints the variable
+- `w` shows the full call stack i.e. the calls that led to where you are now
+- `q` quits the debugger
+- https://docs.python.org/3/library/pdb.html#debugger-commands
 
     
 
