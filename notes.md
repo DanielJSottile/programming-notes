@@ -340,6 +340,9 @@ what is `sudo`?
 
 ---
 
+GIT
+---
+
 - `git clone [URL]` - makes a clone of a repository on github
 
 - `git status` - shows the current state of the git repository
@@ -381,7 +384,26 @@ what is `sudo`?
 
 - `git branch -d <branchname>` deletes that branchname
 
+- to convert a directory into a git repo:
+    - first, create a new repository on Github
 
+    - cd to the repository you want to add
+
+    - type `git init` - it initializes an empty repository
+
+    - `git commit --allow-empty -m 'initial empty commit'` - adds an empty commit - its a commit with no contents.
+
+    - you'll have to add a .gitignore to this directory and add the things you should ignore.
+
+    - `git add .` - adds all the files
+
+    - `git commit -m 'message'` - as normal
+
+    - `git remote add origin <url>` - this sets the remote that you push it to.
+
+    - `git push -u origin master` - this pushes to there.
+
+- to update multiple files again, you can run `git add .` or `git add -u` and push it like normal
 
 ---
 
