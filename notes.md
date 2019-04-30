@@ -345,17 +345,20 @@ what is `sudo`?
 
 -`.bashrc` is located in the ~ directory (home).  So far we have added:
 
--```
+
+```
 [ -d "$HOME/bin" ] && export PATH="${HOME}/bin:${PATH}"
 ```
 - in conjunction with virtualenv
 
--```
+
+```
 export EDITOR=vim VISUAL=vim
 ```
 - in order to set our default interpreter as vim
 
--```
+
+```
 function title() {
     PS1="$(sed 's/\\\[\\e]0;.*\\a\\]//g' <<< "$PS1")"
     PS1="${PS1}\[\e]0;$*\a\]"
