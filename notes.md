@@ -340,6 +340,31 @@ what is `sudo`?
 
 ---
 
+.bashrc
+-------
+
+-`.bashrc` is located in the ~ directory (home).  So far we have added:
+
+-```
+[ -d "$HOME/bin" ] && export PATH="${HOME}/bin:${PATH}"
+```
+- in conjunction with virtualenv
+
+-```
+export EDITOR=vim VISUAL=vim
+```
+- in order to set our default interpreter as vim
+
+-```
+function title() {
+    PS1="$(sed 's/\\\[\\e]0;.*\\a\\]//g' <<< "$PS1")"
+    PS1="${PS1}\[\e]0;$*\a\]"
+}
+```
+- Anthony made this.  If you type `title` followed by any characters, you can make titles for the current tab you are on.  neato.
+
+---
+
 GIT
 ---
 
@@ -1184,6 +1209,11 @@ def test_func(capsys):
     captured = capsys.readouterr()
     assert captured.out == "however it's suppossed to be printed"
 ```
+
+- you can do clever things to make your tests more compact such as:
+ret = function() # call things inside that function
+expected = __ # your expected value
+assert ret == expected
 
 ---
 
