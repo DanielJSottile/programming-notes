@@ -1165,6 +1165,100 @@ with open('foo.txt') as f:
 >>> sio.read(1)
 'h'
 ```
+---
+
+BUTLT IN ITERABLE FUNCTIONS
+---------------------------
+
+- `enumerate` - allows you to run through an interable but allows you to keep a number next to it.  it's formated as:
+
+- `enumerate(iterable, start=0)`
+
+- you can make the iterable a slice, and of course, change the start number.
+
+- `all(iterable)` it iterates over all the elements and returns true if the elements are truthy, or if its empty.
+
+- `any(iterable)` the same thing, but if any are true.  empty in this case is actually False.
+
+- `filter(function or None, iterable)` - it calls a function on each part of the iterable and returns a new version of the iterable if it is true.
+
+- `map(fn, iterable[, iterable, ...])` - it applies a function to each element of an iterable
+
+- `iter(obj)` - returns an iterator from a thing
+
+- theres also `iter(fn, sentinel)` - this makes an iterator where calling next will call that function and return the value, and it will do that until the object returns the sentinel.
+
+- `sentinel` - its a place holder value.
+
+- `next(iterator obj)` - gives the next object in the itorator or raises a StopIteration if it finds nothing next.
+
+```
+>>> x = [1, 2, 3]
+>>> iter(x)
+<list_iterator object at 0x7ff327dbff98>
+>>> x_iter = iter(x)
+>>> next(x_iter)
+1
+>>> next(x_iter)
+2
+>>> next(x_iter)
+3
+>>> next(x_iter)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+```
+- `reversed(iterable)` - it reverses the object inside, unordered objects are not reversible, and unsized objects are not reversible.
+
+- `sorted(iterable, *, key=None, reverse=False)` - it sorts the iterble inside.
+
+- `sum(iterable[, start])` - it adds each of the elements of the iterable, error if wrong type.
+
+- `zip(*iterables)` - yield tuples from each iterator:
+
+```
+>>> for a, b in zip('abc', (1, 2, 3)):
+...     print(f'a: {a}, b: {b}')
+... 
+a: a, b: 1
+a: b, b: 2
+a: c, b: 3
+```
+```
+>>> list(zip('abcdefg', 'hi'))
+[('a', 'h'), ('b', 'i')]
+```
+
+- theres also itertools, which you must import
+https://docs.python.org/3/library/itertools.html
+
+---
+
+COLLECTIONS
+-----------
+
+- it is a module to import
+
+- `collections.defaultdict(factory_fn, <<normal args to dict(...) here>>)`
+
+- works the same as a dictionary, except instead of key erroring, it will call the factory function and return/set that value.  Basically allows you to bypass whether a key exists or not.
+
+- `collections.Counter(iterable)` - makes a mapping from element to count i.e. it counts the amount of unique elements inside.  It acts a little bit like a dictionary.  The most popular is .most_common(n=None)
+
+```
+>>> collections.Counter('the quick brown fox')
+Counter({' ': 3, 'o': 2, 't': 1, 'h': 1, 'e': 1, 'q': 1, 'u': 1, 'i': 1, 'c': 1, 'k': 1, 'b': 1, 'r': 1, 'w': 1, 'n': 1, 'f': 1, 'x': 1})
+```
+
+```
+>>> ctr = collections.Counter((1, 1, 1, 1, 4, 4, 5, 6, 7, 8, 9, 9))
+>>> ctr.most_common(3)
+[(1, 4), (4, 2), (9, 2)]
+```
+
+---
+
+
 
 ---
 
