@@ -1011,7 +1011,7 @@ or
 or
 - `dict([('key1', 'value1'), ('key2', 'value2')])`
 - what it lets you do is map keys to values, allows you to do lookups
-
+- keys must be immutable!
 - operators that can be used:
     - `in` checks if the key exists inside the dictionary
     - `del` will delete an entry
@@ -1258,7 +1258,101 @@ Counter({' ': 3, 'o': 2, 't': 1, 'h': 1, 'e': 1, 'q': 1, 'u': 1, 'i': 1, 'c': 1,
 
 ---
 
+SETS
+----
 
+- a `set` is a mutable, unordered collection of unique items.
+- a `set` must only contain immutable things, same requirement for keys in a dictionary.
+- syntax of sets: `{item1, item2 ... }` it looks a bit like a list.  They can be multi-line just like lists can.
+- the only way to make an empty set is `a = set()`
+- the set class takes an iterable, like a string or a list
+- 
+```
+>>> a = set('abracadabra')
+{'a', 'r', 'b', 'c', 'd'} # unique letters in a
+```
+- methods: 
+
+![](https://i.fluffy.cc/KCbbn6vWKjl7MDqZz8kTWmF9lrbgGJC4.png)
+
+- `set.add(element)` - adds an element to a set.  if there, does nothing. (idempotent)
+- `set.remove(element)` - removes an element or KeyError if it does not exist.
+- `set.discard(element)` - an idempotent remove
+- `set.pop()` - this removes an arbritrary element and returns it. raises KeyError otherwise
+- `set.clear()` - removes all from set.
+- `set.update(*iterables)` - updates the set with the elements from the iterable.
+- `set.intersection_update(*iterables)` - modifies the set to contain only the items that are in all the iterables and itself.
+- `set.difference_update(*iteralbes)` - removes the elements that are in any of the iterables.
+```
+>>> x = {1, 2, 3, 4, 5}
+>>> x.difference_update((1, 2), (2, 3), (5,))
+>>> x
+{4}
+```
+- `set.symmetric_difference_update(other)` - modifies itself to only contain the elements that are not in both.
+```
+>>> x = {1, 2, 3, 4, 5}
+>>> x.symmetric_difference_update((3, 4, 5, 6, 7))
+>>> x
+{1, 2, 6, 7}
+```
+- `set.union(*iterables)` - this one is like update, but it returns a new set (does not modify itself)
+- `set.intersection(*iterables)` - like int-update, but it returns a new set 
+- `set.difference(*iterables)` - " " ", but it returns a new set
+- `set.symmetric_difference(other)` - " " ", but it returns a new set
+
+- `set.isdisjoint(other)` - sets are disjoint if they have no overlap, returns a bool
+- `set.issubset(other)` - true if every element is inside the other set
+- `set.issuperset(other)` - true if every element in other is inside the set (so basically the opposite of above)
+- `set.copy()` - it returns a copy of the set.
+
+- operators
+
+- sets are not indexable!
+- `len(set)` - gives the length of the set
+- `in` and `not in` - tells you whether the element is in the set.
+- `|` - returns the union of sets on both sides. (this is binary 'or')
+- `&` - returns the intersection of sets on both sides (this is binary 'and')
+- `-` - returns the difference of sets on both sides
+- `^` - returns the symmetric difference of sets on both sides (binary 'exclusive or', or 'xor')
+```
+Truth table for AND
+
+  || T | F |
+============
+T || T | F |
+--||---|----
+F || F | F |
+
+Truth table for OR
+
+  || T | F |
+============
+T || T | T |
+--||---|----
+F || T | F |
+
+Truth table for XOR
+
+  || T | F |
+============
+T || F | T |
+--||---|----
+F || T | F |
+```
+
+- `|=` the same as union update
+- `&=` the same as `intersection_update`
+- `-=` " " " `difference_update`
+- `^=` " " " `symmetric_difference_update`
+- `<=` `>=` - they are issubset and issuperset
+- `<` `>` - they are strict subset and strict superset (cannot be equal) 
+- they must have sets on both sides, or else they will TypeError
+
+- Frozen Set
+
+- an immutable set (can only make it from frozenset(iterable)
+- works the same as a set but without any update methods
 
 ---
 
