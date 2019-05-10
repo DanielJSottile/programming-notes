@@ -1356,6 +1356,98 @@ F || T | F |
 
 ---
 
+COMPREHENSIONS
+--------------
+
+- `START-BRACE EXPRESSION FOR-PART (IF-PART | FOR-PART)* END-BRACE`
+- `ret = [x ** 2 for x in range(10) if x % 2 == 0]`
+- roughly the same as:
+```
+ret = []
+for x in range(10):
+    if x % 2 == 0:
+        ret.append(x ** 2)
+```
+- there are 4 types of comprehensions:
+- list comprehension: `[x for x in ...]`
+- set comprehensions: `{x for x in ...}`
+- dict comprehensions: `{k: v for ... }`
+- generator expressions `(x for x in ...)` (is lazy)
+
+- what is lazy?  in programming there are two approaches to computation, eager or lazy.  Eager will compute the value immediately, while lazy will only compute the value when it's necessary.
+
+- an example of gen expressions:
+
+```
+>>> gen = (x for x in range(5))
+>>> gen
+<generator object <genexpr> at 0x7f90a9f07af0>
+>>> next(gen)
+0
+>>> list(gen)
+[1, 2, 3, 4]
+>>> list(gen)
+[]
+```
+
+- you can have double for loops...or MORE!:
+```
+>>> ret = []
+>>> for x in range(5):
+...     for y in range(5):
+...         ret.append((x, y))
+... 
+```
+```
+ret = [(x, y) for x in range(5) for y in range(5)]
+```
+
+- double if statements are treated as `And`
+` ret = [x for x in range(100) if x % 5 == 0 if x < 20]`
+
+---
+
+TERNARY
+-------
+
+- means composed of three parts, in this part, the truth value, the condition, and the false value.
+
+```
+foo = 'hi'
+bar = 'hello' if foo == 'hi' else 'baibai'
+```
+
+---
+
+JSON
+----
+
+- JSON is a data format, "JavaScript Object Notation" and it's primary benefit is that it's extremely simple and readable.  There was XML before JSON.
+- JSON has a few types it can represent.  The first type is strings.  They are always double quoted, otherwise mostly act like python strings.
+- next type is numbers.  Just like normal, numbers.  integers and floats alike map to the JS number type.
+- boolean types, which are true and false, and a null type
+- arrays, which are with []'s and unlike python they cannot have trailing commas
+- obj type, it looks like python syntax but keys must be strings.  and no trailing commas ;(
+- no comments in JSON
+
+- in python theres a module called JSON
+- there are 4 API's:
+- `json.loads(s)` => (python object)
+```
+>>> json.loads('{"foo": ["bar", "baz", "womp"]}')
+{'foo': ['bar', 'baz', 'womp']}
+```
+- `json.dumps(obj)` => (json string)
+- `json.load(file_obj)` => (python object)
+- `json.dump(obj, file_obj)` => writes the obj to the file obj
+
+---
+
+REST API
+--------
+
+---
+
 PYTEST
 ------
 
