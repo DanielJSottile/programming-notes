@@ -1446,6 +1446,54 @@ JSON
 REST API
 --------
 
+- HTTP: hyper text transport protocol, it's a convention built on TCP (transmission control protocol).  Basically, http is the standard convention that you use when you talk to websites.  
+
+- Typically split into 2 portions, request and response.
+- first tells what the protocol is, the verb, and the path, itll pass headers and an optional body.
+- request example:
+
+```
+GET /foo HTTP/2
+Host: example.com
+User-Agent: curl/7.58.0
+Accept: */*
+```
+- the response looks like the protocol, then the status code, then headers, then a body (same format as request)
+
+```
+HTTP/2 200
+cache-control: max-age=604800
+content-type: text/html; charset=UTF-8
+date: Wed, 15 May 2019 00:22:20 GMT
+etag: "1541025663+ident"
+expires: Wed, 22 May 2019 00:22:20 GMT
+last-modified: Fri, 09 Aug 2013 23:54:35 GMT
+server: ECS (sjc/4E8B)
+vary: Accept-Encoding
+x-cache: HIT
+content-length: 1270
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+```
+
+- `HTTP/1.1 404 Not Found`
+- theres several verbs that get used.  The most common one is `GET`. it is used to read things and conventionally does not perform side effects.  i.e. usually is not used to write stuff, only to retrieve.  You can do it but....DONT DO IT.
+- `POST` - usually used for creation, or things that have a side effect.  For instance, signing up for a website, which creates some user data, etc.- generally the web only sticks to GET and POST, but not necessarily anymore.  Old browsers were limited by GET and POST in the past.  womp womp IE.  so sad.
+- `PUT` - update/replace, this also makes modifications and is idempotent.- `PATCH` - update/modify, not idempotent.
+- `DELETE` - deletes stuff.  is idempotent.
+
+- the first is the parameters in the url, one is via path variables `/foo/1` the second is via the query string, it is a ? followed by some parameters and separated by an &, such as `?foo=1&bar=2` special characters get encoded.  for instance, space is either %20 or +.  `urllib.parse` lets you encode url.  that format is called URL encoding.  in GET requests it's the thing after the ?.  in post requests, you can send it as the body of the request data.
+
+- the other convention in POST requests is the send json as the body. it's the same for PUT and PATCH.
+
+- someone will ask in an interview "can a GET request have a body?" technically it can, but no one does that.
+
 ---
 
 PYTEST
