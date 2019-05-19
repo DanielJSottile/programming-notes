@@ -1496,6 +1496,130 @@ content-length: 1270
 
 ---
 
+CLASSES
+-------
+
+- classes give a way to create your own data types.  declare them with class Name:  conventionaly the name should be PascalCase, i.e. each word is capitalized and not separated by an _.
+
+- classes can also have an extra parameter that sepcifies it's base class i.e. inheritance. `class C(base1, base2, base3): pass`
+
+- if you see this `class C(base1, metaclass=M): pass`, this is a metaclass.
+
+- 
+
+```
+class C:
+    # class variables
+    x = 1
+
+   # methods
+    def __init__(self, y):
+        self.y = y # instance variable
+
+    def f(self):
+        print('hello world')
+
+    @staticmethod
+    def static_method(arg1, arg2):
+        print(arg1, arg2)
+
+    @classmethod
+    def class_method(cls, arg1, arg2):
+        print(arg1, arg2)
+```
+
+- self.y is an instance variable.  it exists only on the object. it kinda looks like this in memory: `"object instance": {"__class__": C, "y": ...}`
+
+- the @ is a decorator.  if you have:
+
+```
+@foo
+def bar(): pass
+``` 
+it is equal to:
+```
+def bar(): pass
+bar = foo(bar)
+
+i.e. bottom goes into top.
+
+- 
+```
+
+- @staticmethod and @classmethod make it so that you don't need (self) as arguments.
+
+- @property means you dont need to use parentheses anymore when calling the property. It allows you to have computed attributes.
+
+- conventions in classes:
+
+- def normal_method(...): # public (anyone can call it)
+- def _private_method(...): # private (should only be called by the class itself)
+- def __name_mangled(...): # name mangled (it changes the name when the class gets built so it's even more private), actually ends up being _C__name_mangled (when defined in 'class C')  only used to avoid collisions in inheritance.
+- def __magic__(...): # magic methods do not get name mangles, usually represent special hooks such as operators or lifecycle (__init__)
+
+- INHERITANCE
+
+- if you inherit from a class, you can override it's behaviors.
+
+```
+class C:
+    def bar(self):
+        print("I do the bars!")
+    def foo(self):
+        print('I do the foos!')
+
+class D(C):
+    def foo(self):
+        print('no foos here!')
+```
+but also...
+
+```
+class E(C):
+    def foo(self):
+        super().foo()
+        print('but also E foos!')
+```
+- so in the old days, you could use C.foo() to reference C, but then they added super, which automatically finds the reference for you.
+
+- you can nest classes.  if you want.
+
+---
+
+TRY/EXCEPT
+----------
+
+- syntax:
+```
+try:
+    # any number of statements
+# (optional, and as many as needed)
+except Type:  # or `except (Type, Type2)`  # or `except Type as val:`  # or `except (Type, Type, Type) as val:`
+   # any number of statements)
+# (optional)
+else:
+    # code which is only run if the body of the `try` is successful
+# (optional)
+finally:
+   # code which is run whether or not there is an exception
+```
+
+- dont use except: .  It will catch everything including stuff you do not want to catch.  instead, use except BaseException.
+
+- inside an except block, if you use `raise` without any arguments, that's the same as "re-raise this exception as if I didn't do anything".
+
+
+- 
+```
+except BaseException:
+    # maybe do some logging or whatever
+    raise  # reraise the exception
+```
+
+- when using try/except, it's better to ask for forgiveness than permission.  The idea is that it's more performant to assume it will succeed and catch the error rather than writting it to always check it.  Use it only when you have to.
+
+---
+
 PYTEST
 ------
 
